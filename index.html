@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Angel's 18th Birthday</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Great+Vibes&family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  background: #f8f5f0;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ================= OPEN SCREEN ================= */
+.open-screen {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 99;
+  text-align: center;
+}
+
+.open-screen h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+}
+
+.open-screen p {
+  font-family: 'Great Vibes', cursive;
+  font-size: 22px;
+  margin: 10px 0 26px;
+}
+
+.open-btn {
+  padding: 12px 26px;
+  border: 2px solid #fff;
+  background: transparent;
+  color: #fff;
+  font-size: 13px;
+}
+
+/* ================= MAIN ================= */
+.main {
+  display: none;
+  min-height: 100vh;
+  padding: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* BACKGROUND */
+.bg-circle {
+  position: fixed;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.05);
+  z-index: -1;
+}
+
+.bg-left { top:-80px; left:-80px; }
+.bg-right { bottom:-80px; right:-80px; }
+
+/* DISCO */
+.disco {
+  position: fixed;
+  width: 70px;
+  opacity: 0.25;
+  filter: drop-shadow(0 0 12px rgba(255,255,255,.8));
+  animation: float 6s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.disco.left { left:-25px; top:35%; }
+.disco.right { right:-25px; top:40%; animation-delay:2s; }
+.disco.top { top:-30px; left:50%; transform:translateX(-50%); animation-delay:4s; }
+
+@keyframes float {
+  0% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-12px) rotate(6deg); }
+  100% { transform: translateY(0) rotate(0deg); }
+}
+
+/* INVITATION */
+.invitation {
+  background: #fdfaf6;
+  width: 100%;
+  max-width: 390px;
+  padding: 32px 20px;
+  border: 1.5px solid #000;
+  text-align: center;
+  box-shadow: 0 0 22px rgba(0,0,0,0.15);
+}
+
+/* ANIMATION */
+.fade {
+  opacity: 0;
+  animation: fadeUp .9s ease forwards;
+}
+
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(24px); }
+  to { opacity:1; transform:translateY(0); }
+}
+
+/* GUEST */
+.guest {
+  font-size: 13px;
+  margin-bottom: 18px;
+}
+
+.guest span {
+  display: block;
+  margin-top: 6px;
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: 1px;
+}
+
+/* TEXT */
+.script {
+  font-family: 'Great Vibes', cursive;
+  font-size: 24px;
+  margin-bottom: 14px;
+}
+
+.title {
+  font-family: 'Playfair Display', serif;
+  font-weight: 900;
+  font-size: 34px;
+  margin-bottom: 20px;
+}
+
+.title span { display:block; }
+
+.divider {
+  height: 2px;
+  background: #000;
+  margin: 22px 0;
+}
+
+/* INFO */
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  font-size: 13px;
+}
+
+.info-item {
+  border-top: 2px solid #000;
+  padding-top: 10px;
+}
+
+.info-item:first-child {
+  border-top: none;
+}
+
+.info-item strong {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+
+/* DRESS */
+.dress h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
+}
+
+/* BUTTON */
+.map-btn {
+  display:inline-block;
+  margin-top:22px;
+  padding:11px 22px;
+  border:2px solid #000;
+  text-decoration:none;
+  color:#000;
+  font-size:13px;
+}
+
+.footer {
+  margin-top:26px;
+  font-size:11px;
+  opacity:.7;
+}
+</style>
+</head>
+
+<body>
+
+<!-- OPEN SCREEN -->
+<div class="open-screen" id="openScreen">
+  <h1>Angel's 18th</h1>
+  <p>Birthday Party</p>
+  <button class="open-btn" onclick="openInvitation()">OPEN INVITATION</button>
+</div>
+
+<!-- MUSIC -->
+<audio id="bgMusic" loop>
+  <source src="ssstik.io_1767722290846.mp3" type="audio/mpeg">
+</audio>
+
+<!-- DISCO -->
+<img src="disco.png" class="disco left">
+<img src="disco.png" class="disco right">
+<img src="disco.png" class="disco top">
+
+<!-- MAIN -->
+<div class="main" id="mainContent">
+
+  <div class="bg-circle bg-left"></div>
+  <div class="bg-circle bg-right"></div>
+
+  <div class="invitation">
+
+    <!-- NAMA TAMU -->
+    <div class="guest fade" style="animation-delay:.1s">
+      Dear,<br>
+      <span id="guestName">Special Guest</span>
+    </div>
+
+    <div class="script fade" style="animation-delay:.3s">Join us for</div>
+
+    <div class="title fade" style="animation-delay:.5s">
+      <span>ANGEL'S</span>
+      <span>18TH</span>
+      <span>BIRTHDAY</span>
+    </div>
+
+    <div class="divider fade" style="animation-delay:.7s"></div>
+
+    <div class="info">
+      <div class="info-item fade" style="animation-delay:.9s">
+        <strong>TIME</strong>18.30 PM
+      </div>
+      <div class="info-item fade" style="animation-delay:1.1s">
+        <strong>DATE</strong>24 January 2026
+      </div>
+      <div class="info-item fade" style="animation-delay:1.3s">
+        <strong>PLACE</strong>
+        Nukamari Kopi<br>Cibinong
+      </div>
+    </div>
+
+    <div class="divider fade" style="animation-delay:1.5s"></div>
+
+    <div class="dress fade" style="animation-delay:1.7s">
+      <h3>DRESS CODE</h3>
+      <p>"BLACK & WHITE"</p>
+    </div>
+
+    <a href="https://maps.app.goo.gl/yJYPVQ4tHTrpkHA8A"
+       target="_blank"
+       class="map-btn fade"
+       style="animation-delay:1.9s">
+       📍 OPEN MAPS
+    </a>
+
+    <div class="footer fade" style="animation-delay:2.1s">
+      We can’t wait to celebrate with you 🤍
+    </div>
+
+  </div>
+</div>
+
+<script>
+/* OPEN INVITATION */
+function openInvitation(){
+  document.getElementById('openScreen').style.display='none';
+  document.getElementById('mainContent').style.display='flex';
+
+  const music = document.getElementById('bgMusic');
+  music.volume = 0.5;
+  music.play().catch(()=>{
+    document.body.addEventListener('click',()=>music.play(),{once:true});
+  });
+}
+
+/* NAMA TAMU VIA LINK */
+const params = new URLSearchParams(window.location.search);
+const guest = params.get('to');
+if (guest) {
+  document.getElementById('guestName').textContent = guest;
+}
+</script>
+
+</body>
+</html>
