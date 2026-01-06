@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Angel's 18th Birthday</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Great+Vibes&family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #f8f5f0;
+  font-family: 'Montserrat', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ================= OPEN INVITATION ================= */
+.open-screen {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  text-align: center;
+  animation: fadeIn 1s ease;
+}
+
+.open-screen h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 36px;
+  margin-bottom: 10px;
+}
+
+.open-screen p {
+  font-family: 'Great Vibes', cursive;
+  font-size: 26px;
+  margin-bottom: 30px;
+}
+
+.open-btn {
+  padding: 14px 30px;
+  border: 2px solid #fff;
+  background: transparent;
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.open-btn:hover {
+  background: #fff;
+  color: #000;
+}
+
+/* ================= MAIN CONTENT ================= */
+.main {
+  display: none;
+  min-height: 100vh;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* BACKGROUND */
+.bg-circle {
+  position: fixed;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.05);
+  z-index: -1;
+}
+
+.left { top:-100px; left:-100px; }
+.right { bottom:-100px; right:-100px; }
+
+/* SPARKLE */
+.sparkle {
+  position: fixed;
+  width: 4px;
+  height: 4px;
+  background: rgba(255,255,255,0.8);
+  border-radius: 50%;
+  animation: sparkle 6s linear infinite;
+}
+
+@keyframes sparkle {
+  from {
+    transform: translateY(100vh) scale(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-10vh) scale(1);
+    opacity: 0;
+  }
+}
+
+/* INVITATION */
+.invitation {
+  background: #fdfaf6;
+  max-width: 420px;
+  width: 100%;
+  padding: 45px 30px;
+  border: 2px solid #000;
+  text-align: center;
+}
+
+/* STAGGER ANIMATION */
+.fade {
+  opacity: 0;
+  animation: fadeUp 1s ease forwards;
+}
+
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(30px); }
+  to { opacity:1; transform:translateY(0); }
+}
+
+/* TEXT */
+.script {
+  font-family: 'Great Vibes', cursive;
+  font-size: 28px;
+  margin-bottom: 18px;
+}
+
+.title {
+  font-family: 'Playfair Display', serif;
+  font-weight: 900;
+  font-size: 46px;
+  margin-bottom: 25px;
+}
+
+.title span { display:block; }
+
+.divider {
+  height: 2px;
+  background: #000;
+  margin: 25px 0;
+}
+
+.info {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 12px;
+  font-size: 14px;
+}
+
+.info div {
+  border-left: 2px solid #000;
+  padding-left: 10px;
+}
+
+.info div:first-child {
+  border-left:none;
+  padding-left:0;
+}
+
+.dress h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+}
+
+.map-btn {
+  display:inline-block;
+  margin-top:25px;
+  padding:12px 24px;
+  border:2px solid #000;
+  text-decoration:none;
+  color:#000;
+  transition:.3s;
+}
+
+.map-btn:hover {
+  background:#000;
+  color:#fff;
+}
+
+.footer {
+  margin-top:30px;
+  font-size:12px;
+  opacity:.7;
+}
+
+/* RESPONSIVE */
+@media(max-width:480px){
+  .title { font-size:38px; }
+}
+</style>
+</head>
+<body>
+
+<!-- OPEN SCREEN -->
+<div class="open-screen" id="openScreen">
+  <h1>Angel's 18th</h1>
+  <p>Birthday Party</p>
+  <button class="open-btn" onclick="openInvitation()">OPEN INVITATION</button>
+</div>
+
+<!-- MUSIC (AUTOPLAY) -->
+<audio id="bgMusic" loop>
+  <source src="ssstik.io_1767722290846.mp3" type="audio/mpeg">
+</audio>
+
+<!-- MAIN CONTENT -->
+<div class="main" id="mainContent">
+
+  <div class="bg-circle left"></div>
+  <div class="bg-circle right"></div>
+
+  <!-- SPARKLE -->
+  <script>
+    for(let i=0;i<25;i++){
+      const s=document.createElement('div');
+      s.className='sparkle';
+      s.style.left=Math.random()*100+'vw';
+      s.style.animationDelay=Math.random()*6+'s';
+      document.body.appendChild(s);
+    }
+  </script>
+
+  <div class="invitation">
+    <div class="script fade" style="animation-delay:.2s">Join us for</div>
+
+    <div class="title fade" style="animation-delay:.4s">
+      <span>ANGEL'S</span>
+      <span>18TH</span>
+      <span>BIRTHDAY</span>
+    </div>
+
+    <div class="divider fade" style="animation-delay:.6s"></div>
+
+    <div class="info fade" style="animation-delay:.8s">
+      <div><strong>TIME</strong>18.30 PM</div>
+      <div><strong>DATE</strong>24 January 2026</div>
+      <div><strong>PLACE</strong>Nukamari Kopi<br>Cibinong</div>
+    </div>
+
+    <div class="divider fade" style="animation-delay:1s"></div>
+
+    <div class="dress fade" style="animation-delay:1.2s">
+      <h3>DRESS CODE</h3>
+      <p>"BLACK & WHITE"</p>
+    </div>
+
+    <a href="https://maps.app.goo.gl/dEJaqFHF9t2mRYqj7"
+       target="_blank"
+       class="map-btn fade"
+       style="animation-delay:1.4s">
+       📍 OPEN MAPS
+    </a>
+
+    <div class="footer fade" style="animation-delay:1.6s">
+      We can’t wait to celebrate with you 🤍
+    </div>
+  </div>
+</div>
+
+<script>
+function openInvitation(){
+  document.getElementById('openScreen').style.display='none';
+  document.getElementById('mainContent').style.display='flex';
+
+  const music=document.getElementById('bgMusic');
+  music.volume=0.5;
+  music.play().catch(()=>{
+    document.body.addEventListener('click',()=>music.play(),{once:true});
+  });
+}
+</script>
+
+</body>
+</html>
