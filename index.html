@@ -48,7 +48,7 @@
       right: -100px;
     }
 
-    /* INVITATION BOX */
+    /* INVITATION */
     .invitation {
       background: #fdfaf6;
       max-width: 420px;
@@ -163,22 +163,6 @@
       opacity: 0.75;
     }
 
-    /* MUSIC BUTTON */
-    .music-btn {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      border: none;
-      background: #000;
-      color: #fff;
-      font-size: 20px;
-      cursor: pointer;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-    }
-
     /* RESPONSIVE */
     @media (max-width: 480px) {
       .title {
@@ -193,12 +177,10 @@
   <div class="bg-circle left"></div>
   <div class="bg-circle right"></div>
 
-  <!-- MUSIC -->
-  <audio id="bgMusic" loop>
-    <source src="ssstik.io_1767722290846.mp3" type="audio/mpeg">
+  <!-- AUTOPLAY MUSIC -->
+  <audio id="bgMusic" autoplay loop>
+    <source src="music.mp3" type="audio/mpeg">
   </audio>
-
-  <button class="music-btn" onclick="toggleMusic()">🔊</button>
 
   <!-- INVITATION -->
   <div class="invitation">
@@ -234,7 +216,7 @@
       <p>"BLACK & WHITE"</p>
     </div>
 
-    <a href="https://maps.app.goo.gl/vmYs6NT3XkYDZEyr7"
+    <a href="https://maps.google.com/?q=Nukamari+Kopi+Cibinong"
        target="_blank"
        class="map-btn">
        📍 OPEN MAPS
@@ -245,20 +227,21 @@
     </div>
   </div>
 
-  <!-- SCRIPT -->
+  <!-- AUTOPLAY FALLBACK -->
   <script>
-    const music = document.getElementById("bgMusic");
-    let isPlaying = false;
+    window.addEventListener('load', () => {
+      const music = document.getElementById('bgMusic');
+      music.volume = 0.5;
 
-    function toggleMusic() {
-      if (!isPlaying) {
-        music.play();
-        isPlaying = true;
-      } else {
-        music.pause();
-        isPlaying = false;
+      const playPromise = music.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {
+          document.body.addEventListener('click', () => {
+            music.play();
+          }, { once: true });
+        });
       }
-    }
+    });
   </script>
 
 </body>
